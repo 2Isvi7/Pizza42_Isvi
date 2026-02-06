@@ -91,10 +91,29 @@ const Dashboard = () => {
       <main className="main-content">
         <div className="dashboard-container">
           
-          {/* Banner de Verificación (Punto 7) */}
+          {/* Banner de Verificación Mejorado */}
           {!user.email_verified && (
             <div className="warning-banner">
-              ⚠️ <strong>Acción Requerida:</strong> Por favor verifica tu correo ({user.email}) para habilitar los pedidos.
+              <p style={{ margin: 0, display: 'inline-block' }}>
+                ⚠️ <strong>Acción Requerida:</strong> Por favor verifica tu correo ({user.email}) para habilitar los pedidos.
+              </p>
+              
+              {/* Botón para recargar sin salir */}
+              <button 
+                onClick={() => window.location.reload()} 
+                style={{
+                  marginLeft: '15px',
+                  padding: '5px 10px',
+                  cursor: 'pointer',
+                  backgroundColor: 'white',
+                  border: '1px solid #856404',
+                  borderRadius: '4px',
+                  color: '#856404',
+                  fontWeight: 'bold'
+                }}
+              >
+                🔄 Ya lo verifiqué
+              </button>
             </div>
           )}
 
