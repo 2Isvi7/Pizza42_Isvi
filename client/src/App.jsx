@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import LandingPage from "./components/LandingPage";
 import Dashboard from "./components/Dashboard";
-import "./App.css";
+import "./app.css";
 
 function App() {
   const { isLoading, isAuthenticated, error } = useAuth0();
