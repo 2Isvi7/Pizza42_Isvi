@@ -13,6 +13,15 @@ body {
   background-color: #f9f9f9;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
 /* HEADER */
 .brand-header {
   background-color: var(--ph-red);
@@ -95,31 +104,37 @@ body {
 /* BANNER */
 .hero-banner {
   width: 100%;
-  height: 450px; /* Altura reservada */
-  background-color: #333; /* Color de fondo mientras carga imagen */
-  background-image: url('/promo-banner.jpg'); /* RUTA DE TU IMAGEN */
+  /* Usamos min-height en vez de height para que no corte contenido en móviles */
+  min-height: 450px; 
+  background-color: #333;
+  background-image: url('/loginbanner_comprimido.png'); /* Asegúrate que la ruta sea correcta */
   background-size: cover;
-  background-position: center;
+  background-position: center; /* Centra la imagen */
   position: relative;
+  
+  /* Mágia de Flexbox para centrar el texto sin márgenes raros */
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  align-items: center; 
+  padding: 40px; /* Espacio interior para que el texto no toque bordes */
 }
 
 .banner-overlay {
-  margin-left: 9%;
-  margin-top: -20%;
+  /* Quitamos los márgenes negativos que causaban problemas */
+  margin: 0; 
   color: white;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  max-width: 600px; /* Evita que el texto se estire demasiado en pantallas gigantes */
 }
 
+/* Ajuste para que el título no sea gigante en móvil */
 .banner-overlay h1 {
   font-family: 'Oswald', sans-serif;
-  font-size: 4rem;
+  font-size: clamp(2.5rem, 5vw, 4rem); /* Tamaño dinámico: min 2.5rem, ideal 5vw, max 4rem */
   margin: 0;
   text-transform: uppercase;
-  line-height: 1;
+  line-height: 1.1;
 }
+
 
 /* DASHBOARD / MENU */
 .main-content {
@@ -199,3 +214,32 @@ body {
   transition: transform 0.2s;
 }
 .btn-hero-cta:hover { transform: scale(1.1); }
+
+
+/* AJUSTES PARA CELULAR */
+@media (max-width: 768px) {
+  .brand-header {
+    height: auto; /* Deja que crezca si es necesario */
+    padding: 10px 0;
+  }
+
+  .header-content {
+    flex-direction: column; /* Apila logo y botones */
+    gap: 10px;
+  }
+
+  .hero-banner {
+    min-height: 300px; /* Banner más bajito en celular */
+    align-items: flex-end; /* Texto abajo en celulares para ver mejor la foto */
+    padding-bottom: 40px;
+  }
+  
+  .banner-overlay h1 {
+    font-size: 2.5rem; /* Asegura título legible */
+  }
+
+  .btn-hero-cta {
+    padding: 10px 25px; /* Botón más pequeño */
+    font-size: 1.2rem;
+  }
+}
