@@ -14,7 +14,7 @@ const Dashboard = () => {
       // 1. Obtener Token Seguro (Punto 8)
       const token = await getAccessTokenSilently({
         authorizationParams: {
-          audience: "https://api.pizza42.com",
+          audience: import.meta.env.VITE_AUTH0_AUDIENCE,
           scope: "write:orders",
         },
       });
@@ -27,10 +27,13 @@ const Dashboard = () => {
         user_email: user.email
       };
 
-      console.log("Enviando orden...", orderData);
+      // Usamos la variable de entorno. Si no existe (en local), usa localhost.
+      const apiBase = import.meta.env.VITE_API_URL || "http://localhost:3001";
+      
+      console.log("Enviando a:", `${apiBase}/api/orders`);
 
       // 3. Llamada al Backend (Punto 5 y 9)
-      const response = await fetch("http://localhost:3001/api/orders", {
+      const response = await fetch(`${apiBase}/api/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
